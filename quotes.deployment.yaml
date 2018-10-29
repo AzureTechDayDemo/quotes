@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: quotes-api
+  labels:
+    app: quotes-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quotes-api
+  template:
+    metadata:
+     labels:
+        app: quotes-api
+    spec:
+      containers:
+      - name: quotes-api
+        image: atddemos.azurecr.io/demo42/quotes-api:ccu
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConfigPath
+          value: "/etc/secrets"
+        volumeMounts:
+            - name: app-secrets
+              mountPath: "/etc/secrets"
+      volumes:
+      - name: app-secrets
+        secret:
+          secretName: quotes-secret
+          defaultMode: 256
+      imagePullSecrets:
+        - name: acr-auth
+---
+apiVersion: v1
+kind: Service
+metadata:
+    # used for in-cluster dns discovery
+    name: quotes-api
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+          targetPort: 80
+    selector:
+        app: quotes-api
+    type: ClusterIP
+
