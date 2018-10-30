@@ -18,9 +18,10 @@ namespace QuoteService
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Quote>()
-                   .HasData(new Quote { Id=1,Attribution="Will Huang", Text="The network is always reliable." })
-                   .HasData(new Quote { Id=1,Attribution="Albert Einstein", Text="The value of a man resides in what he gives and not in what he is capable of receiving." })
-                   .HasData(new Quote { Id=1,Attribution="N/A", Text="世上沒有絕望的處境，只有對處境絕望的人。" });
+                   .HasData(new Quote { Id=1,Attribution="Will Huang", Text="The network is always reliable." },
+                            new Quote { Id=2,Attribution="Albert Einstein", Text="The value of a man resides in what he gives and not in what he is capable of receiving." },
+                            new Quote { Id=3,Attribution="N/A", Text="世上沒有絕望的處境，只有對處境絕望的人。" }
+                   );
         }
     }
 }

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: quotes-api
-        image: atddemos.azurecr.io/demo42/quotes-api:ccu
+        image: atddemos.azurecr.io/demo42/quotes-api:cc19
         imagePullPolicy: Always
         ports:
         - containerPort: 80
